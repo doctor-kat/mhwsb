@@ -28,13 +28,11 @@ type ArmorTableProps = {
     ColumnFiltersState,
     React.Dispatch<React.SetStateAction<ColumnFiltersState>>
   ];
-  onClick: (armor: Armor) => void;
 };
 
 export default function ArmorTable({
   data: { armors, armorSets, skills },
   columnFiltersState: [columnFilters, setColumnFilters],
-  onClick,
 }: ArmorTableProps) {
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<Armor>();
@@ -106,7 +104,6 @@ export default function ArmorTable({
             <Table.Td>
               <ArmorGroup
                 armors={row.subRows.map(({ original }) => original)}
-                onClick={onClick}
               />
             </Table.Td>
           </Table.Tr>

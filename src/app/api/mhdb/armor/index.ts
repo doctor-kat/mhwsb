@@ -1,7 +1,7 @@
 import { Armor } from "@/app/api/mhdb/armor/Armor";
 import { baseUrl } from "@/app/api/mhdb/endpoint";
 
-export async function getArmor({ id }: { id?: string }) {
+export async function getArmor({ id }: { id: number }) {
   const response = await fetch(`${baseUrl}/armor/${id}`, {
     cache: "force-cache",
   });

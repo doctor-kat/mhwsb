@@ -3,15 +3,10 @@
 import { Armor, ArmorKind } from "@/app/api/mhdb/armor/Armor";
 import { ActionIcon, Group } from "@mantine/core";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
-export default function ArmorGroup({
-  armors,
-  onClick,
-}: {
-  armors: Armor[];
-  onClick: (armor: Armor) => void;
-}) {
+export default function ArmorGroup({ armors }: { armors: Armor[] }) {
   const armorMap = Object.fromEntries(
     Object.values(ArmorKind).map((armorKind) => [
       armorKind,
@@ -25,10 +20,11 @@ export default function ArmorGroup({
         <ActionIcon
           key={index}
           disabled={!armor}
+          component={Link}
+          href={`/armor/${armor?.id}`}
           size={36}
           variant="outline"
           className="bg-transparent"
-          onClick={() => onClick(armor!)}
         >
           <Image
             src={armor ? `/icon/armor_${armorKind}.png` : `/icon/none.png`}
