@@ -11,7 +11,6 @@ import {
   Stack,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconBrandGithub, IconBug } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -113,6 +112,7 @@ export default function RootShell({
           {Object.entries({
             ailments: "ailment_poison",
             items: "chest",
+            monsters: "monster_doshaguma",
           }).map(([route, icon]) => (
             <NavLink
               key={route}
@@ -168,13 +168,22 @@ export default function RootShell({
         <Stack gap={0}>
           <NavLink
             label="Github"
-            leftSection={<IconBrandGithub />}
+            leftSection={
+              <Image src={`/icon/book.png`} alt="book" width={24} height={24} />
+            }
             component={Link}
             href="https://github.com/doctor-kat/mhwsb"
           />
           <NavLink
             label="Report a bug"
-            leftSection={<IconBug />}
+            leftSection={
+              <Image
+                src={`/icon/endemic_bitterbug.png`}
+                alt="endemic_bitterbug"
+                width={24}
+                height={24}
+              />
+            }
             component={Link}
             href="https://github.com/doctor-kat/mhwsb/issues/new"
           />
@@ -182,7 +191,7 @@ export default function RootShell({
             label="Monster Hunter DB"
             leftSection={
               <Image
-                src={`/icon/rathalos.png`}
+                src={`/icon/tile203.png`}
                 alt="mhdb_logo"
                 width={24}
                 height={24}
