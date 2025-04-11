@@ -56,6 +56,6 @@ export const artianOverride: (weapon: Weapon) => Partial<Weapon> = (
   crafting: {
     id: weapon.id,
     column: weapon.rarity,
-    row: 999,
+    row: 20.5,
   } as WeaponCrafting,
 });
