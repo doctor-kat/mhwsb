@@ -1,8 +1,17 @@
 "use client";
 
 import { WeaponKind } from "@/app/api/mhdb/weapons/WeaponKind";
-import { AppShell, Burger, Container, Group, NavLink } from "@mantine/core";
+import {
+  AppShell,
+  Burger,
+  Container,
+  Divider,
+  Group,
+  NavLink,
+  Stack,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { IconBrandGithub, IconBug } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -38,89 +47,151 @@ export default function RootShell({
           Monster Hunter Wilds Set Builder
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar p="md">
-        {Object.entries({
-          armor: "equipment",
-          charms: "armor_charm",
-          decorations: "decoration_3",
-          skills: "note_buff",
-        }).map(([route, icon]) => (
-          <NavLink
-            key={route}
-            active={pathname === `/${route}`}
-            component={Link}
-            href={`/${route}`}
-            leftSection={
-              <Image
-                src={`/icon/${icon}.png`}
-                alt={icon}
-                width={24}
-                height={24}
-              />
-            }
-            label={route}
-            variant="default"
-            className="capitalize"
-          />
-        ))}
-        <NavLink
-          active={pathname.startsWith("/weapon")}
-          component={Link}
-          href="/weapons"
-          leftSection={
-            <Image
-              src={`/icon/sharpening_stone.png`}
-              alt="sharpening_stone"
-              width={24}
-              height={24}
-            />
-          }
-          label="weapons"
-          variant="default"
-          className="capitalize"
-        >
-          {Object.values(WeaponKind).map((kind) => (
+      <AppShell.Navbar p="md" className="justify-between">
+        <Stack gap={0}>
+          {Object.entries({
+            armor: "equipment",
+            charms: "armor_charm",
+            decorations: "decoration_3",
+            skills: "note_buff",
+          }).map(([route, icon]) => (
             <NavLink
-              key={kind}
-              active={pathname === `/weapon/${kind}`}
+              key={route}
+              active={pathname === `/${route}`}
               component={Link}
-              href={`/weapon/${kind}`}
+              href={`/${route}`}
               leftSection={
                 <Image
-                  src={`/icon/weapon_${kind}.png`}
-                  alt={kind}
+                  src={`/icon/${icon}.png`}
+                  alt={icon}
                   width={24}
                   height={24}
                 />
               }
-              label={kind.replace("-", " ")}
+              label={route}
               variant="default"
               className="capitalize"
             />
           ))}
-        </NavLink>
-        {Object.entries({
-          ailments: "ailment_poison",
-          items: "chest",
-        }).map(([route, icon]) => (
           <NavLink
-            key={route}
-            disabled
+            active={pathname.startsWith("/weapon")}
             component={Link}
-            href={`/${route}`}
+            href="/weapons"
             leftSection={
               <Image
-                src={`/icon/${icon}.png`}
-                alt={icon}
+                src={`/icon/sharpening_stone.png`}
+                alt="sharpening_stone"
                 width={24}
                 height={24}
               />
             }
-            label={route}
+            label="weapons"
+            variant="default"
+            className="capitalize"
+          >
+            {Object.values(WeaponKind).map((kind) => (
+              <NavLink
+                key={kind}
+                active={pathname === `/weapon/${kind}`}
+                component={Link}
+                href={`/weapon/${kind}`}
+                leftSection={
+                  <Image
+                    src={`/icon/weapon_${kind}.png`}
+                    alt={kind}
+                    width={24}
+                    height={24}
+                  />
+                }
+                label={kind.replace("-", " ")}
+                variant="default"
+                className="capitalize"
+              />
+            ))}
+          </NavLink>
+          <Divider />
+          {Object.entries({
+            ailments: "ailment_poison",
+            items: "chest",
+          }).map(([route, icon]) => (
+            <NavLink
+              key={route}
+              disabled
+              component={Link}
+              href={`/${route}`}
+              leftSection={
+                <Image
+                  src={`/icon/${icon}.png`}
+                  alt={icon}
+                  width={24}
+                  height={24}
+                />
+              }
+              label={route}
+              variant="default"
+              className="capitalize"
+            />
+          ))}
+          <NavLink
+            disabled
+            component={Link}
+            href="/loadout"
+            leftSection={
+              <Image
+                src={`/icon/armor_display.png`}
+                alt="armor_display"
+                width={24}
+                height={24}
+              />
+            }
+            label="Loadouts"
             variant="default"
             className="capitalize"
           />
-        ))}
+          <NavLink
+            disabled
+            component={Link}
+            href="/set-finder"
+            leftSection={
+              <Image
+                src={`/icon/endemic_sandstar.png`}
+                alt="endemic_sandstar"
+                width={24}
+                height={24}
+              />
+            }
+            label="Set Finder"
+            variant="default"
+            className="capitalize"
+          />
+        </Stack>
+        <Stack gap={0}>
+          <NavLink
+            label="Github"
+            leftSection={<IconBrandGithub />}
+            component={Link}
+            href="https://github.com/doctor-kat/mhwsb"
+          />
+          <NavLink
+            label="Report a bug"
+            leftSection={<IconBug />}
+            component={Link}
+            href="https://github.com/doctor-kat/mhwsb/issues/new"
+          />
+          <NavLink
+            label="Monster Hunter DB"
+            leftSection={
+              <Image
+                src={`/icon/rathalos.png`}
+                alt="mhdb_logo"
+                width={24}
+                height={24}
+              />
+            }
+            component={Link}
+            href="https://docs.wilds.mhdb.io/"
+          />
+        </Stack>
       </AppShell.Navbar>
       <AppShell.Main>
         <Suspense fallback="LOADING">
